@@ -3,12 +3,21 @@
  */
 package qmoney;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import qmoney.portfolio.IPortfolioManager;
+import qmoney.portfolio.PortfolioManager;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static void main(String[] args) throws IOException, URISyntaxException {
+
+        IPortfolioManager portfolioManager = new PortfolioManager();
+        portfolioManager.readTrades("trade.json");
+        
     }
 }
