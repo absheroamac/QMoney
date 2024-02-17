@@ -8,7 +8,13 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'java'
+    id 'maven-publish'
+
 }
+
+group = 'com.AnnualReturn'
+version = '1.0.0'
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -26,7 +32,8 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework:spring-web:5.3.18'
 
 
 }
@@ -46,4 +53,18 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+publishing{
+    publications{
+        mavenJava(MavenPublication){
+            from components.java
+        }
+    }
+
+    repositories{
+        maven{
+            url = uri("$buildDir/repo")
+        }
+    }
 }
